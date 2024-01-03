@@ -36,8 +36,27 @@ class Doltics_Validator {
 	 * Main plugin constructor.
 	 */
 	public function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
+
 		Doltics_Validator_Logger::init_directory();
 		Doltics_Validator_Admin::instance();
 		Doltics_Validator_Integrations::instance();
 	}
+
+	/**
+	 * Initialize the plugin.
+	 *
+	 * @return void
+	 */
+	public function init_plugin() {
+
+		// Set up the languages.
+		load_plugin_textdomain(
+			'doltics-validator',
+			false,
+			DOLTICS_VALIDATOR_PLUGIN_LANG_DIR
+		);
+	}
+
+	
 }

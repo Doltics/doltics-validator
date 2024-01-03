@@ -30,6 +30,11 @@ if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_DIR' ) ) {
 	define( 'DOLTICS_VALIDATOR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
+// Define the languages directory.
+if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_LANG_DIR' ) ) {
+	define( 'DOLTICS_VALIDATOR_PLUGIN_LANG_DIR', DOLTICS_VALIDATOR_PLUGIN_DIR . 'languages' );
+}
+
 // Define the logs directory.
 if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_LOG_DIR' ) ) {
 	$upload_dir = wp_upload_dir();
