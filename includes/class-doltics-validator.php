@@ -38,6 +38,8 @@ class Doltics_Validator {
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 
+		add_filter( 'plugin_action_links_' . DOLTICS_VALIDATOR_PLUGIN , array( $this, 'add_action_links' ) );
+
 		Doltics_Validator_Logger::init_directory();
 		Doltics_Validator_Admin::instance();
 		Doltics_Validator_Integrations::instance();
@@ -58,5 +60,18 @@ class Doltics_Validator {
 		);
 	}
 
-	
+	/**
+	 * Add plugin action links.
+	 *
+	 * @param array $actions The default actions.
+	 *
+	 * @return array
+	 */
+	public function add_action_links( $actions ) {
+		$mylinks = array(
+			'<a href="' . admin_url( 'options-general.php?page=doltics-validator' ) . '">' . __( 'Settings', 'doltics-validator' ) . '</a>',
+		);
+		$actions = array_merge( $actions, $mylinks );
+		return $actions;
+	}
 }
