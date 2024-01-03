@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:         Doltics Validator
- * Plugin URI:          https://www.doltics.com/product/validator
+ * Plugin URI:          https://docs.doltics.com/validator
  * Description:         Validator API for your website.
  * Version:             1.0.0
  * Author:              doltics
@@ -28,11 +28,6 @@ if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_' ) ) {
 
 if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_DIR' ) ) {
 	define( 'DOLTICS_VALIDATOR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-}
-
-// Define the languages directory.
-if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_LANG_DIR' ) ) {
-	define( 'DOLTICS_VALIDATOR_PLUGIN_LANG_DIR', DOLTICS_VALIDATOR_PLUGIN_DIR . 'languages' );
 }
 
 // Define the logs directory.
