@@ -29,7 +29,7 @@ We validate email records against the domain to ensure that you are receiving an
 No we do not save or store any emails sent to the API. We only process the emails for validation.
 
 = I found a bug in the plugin. =
-Please post it in the [GitHub issues page](https://github.com/hubloy/memberships-by-hubloy/issues/new/choose) and we'll fix it right away. Thanks for helping.
+Please post it in the [GitHub issues page](https://github.com/Doltics/doltics-validator/issues/new/choose) and we'll fix it right away. Thanks for helping.
 
 
 == Changelog ==
