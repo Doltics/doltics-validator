@@ -1,11 +1,11 @@
 <?php
-namespace DolticsValidator;
-
 /**
  * Plugin logger.
  *
  * @package DolticsValidator
  */
+
+namespace DolticsValidator;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

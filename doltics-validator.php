@@ -47,7 +47,7 @@ if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_LOG_DIR' ) ) {
  * @param string $class_name Name of the class to load.
  */
 function doltics_validator_autoload( $class_name ) {
-	
+
 	$pools = explode( '\\', $class_name );
 
 	if ( 'DolticsValidator' !== $pools[0] ) {
@@ -66,7 +66,6 @@ function doltics_validator_autoload( $class_name ) {
 	 */
 	$class_file = 'class-' . strtolower( str_replace( '_', '-', $pools[1] ) ) . '.php';
 	$class_path = DOLTICS_VALIDATOR_PLUGIN_DIR . '/includes/' . $class_file;
-
 
 	if ( file_exists( $class_path ) ) {
 		require $class_path;

@@ -1,11 +1,11 @@
 <?php
-namespace DolticsValidator;
-
 /**
  * Base class for plugin.
  *
  * @package DolticsValidator
  */
+
+namespace DolticsValidator;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -40,7 +40,7 @@ class Doltics_Validator {
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 
-		add_filter( 'plugin_action_links_' . DOLTICS_VALIDATOR_PLUGIN , array( $this, 'add_action_links' ) );
+		add_filter( 'plugin_action_links_' . DOLTICS_VALIDATOR_PLUGIN, array( $this, 'add_action_links' ) );
 
 		Doltics_Validator_Logger::init_directory();
 		Doltics_Validator_Admin::instance();

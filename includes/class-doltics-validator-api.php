@@ -1,11 +1,11 @@
 <?php
-namespace DolticsValidator;
-
 /**
  * API integrations.
  *
  * @package DolticsValidator
  */
+
+namespace DolticsValidator;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -27,7 +27,7 @@ class Doltics_Validator_Api {
 	public static function validate( $email ) {
 		// Remote connection to validate email.
 		// terms of service available at https://doltics.com/terms-of-service/
-		// Docs available at https://docs.doltics.com/validator
+		// Docs available at https://docs.doltics.com/validator .
 		$response = wp_remote_get( 'https://validator.doltics.com/api/validate/email?email=' . $email );
 
 		if ( is_array( $response ) && ! is_wp_error( $response ) ) {

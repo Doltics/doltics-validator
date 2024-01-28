@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Doltics Validator 1.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/doltics-validator\n"
-"POT-Creation-Date: 2024-01-07 08:28:02+00:00\n"
+"POT-Creation-Date: 2024-01-28 18:39:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "Doltics Validator"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:67
+#: includes/class-doltics-validator-admin.php:69
 msgid "Doltics Validator Settings"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:73
-#: includes/class-doltics-validator-admin.php:77
+#: includes/class-doltics-validator-admin.php:75
+#: includes/class-doltics-validator-admin.php:79
 msgid "Enable Email Validation"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:84
+#: includes/class-doltics-validator-admin.php:86
 #. translators: 1: Opening link tag 2: Closing link tag.
 msgid "Enable this to use our email %1$svalidation API%2$s"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:92
-#: includes/class-doltics-validator-admin.php:96
+#: includes/class-doltics-validator-admin.php:94
+#: includes/class-doltics-validator-admin.php:98
 msgid "Enable Debugging"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:103
+#: includes/class-doltics-validator-admin.php:105
 #. translators: The debug directory.
 msgid ""
 "Enable debugging. This will generate logs for the API requests in the  %s "
 "directory"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:112
+#: includes/class-doltics-validator-admin.php:114
 msgid "Save Changes"
 msgstr ""
 
-#: includes/class-doltics-validator.php:72
+#: includes/class-doltics-validator.php:74
 msgid "Settings"
 msgstr ""
 
