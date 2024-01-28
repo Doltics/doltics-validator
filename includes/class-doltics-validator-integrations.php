@@ -1,4 +1,6 @@
 <?php
+namespace DolticsValidator;
+
 /**
  * Plugin and site integrations.
  *
@@ -49,7 +51,7 @@ class Doltics_Validator_Integrations {
 	 */
 	public function validate_email( $is_email, $email, $context ) {
 		if ( $is_email ) {
-			$validator_options = get_doltics_validator_options();
+			$validator_options = doltics_validator_get_options();
 			if ( 1 === $validator_options['enabled'] ) {
 				// If the request is a valid email, we validate via the API.
 				return Doltics_Validator_Api::validate( $email );

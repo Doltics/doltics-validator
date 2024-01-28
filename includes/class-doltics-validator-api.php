@@ -1,4 +1,6 @@
 <?php
+namespace DolticsValidator;
+
 /**
  * API integrations.
  *
@@ -47,7 +49,7 @@ class Doltics_Validator_Api {
 	 * @return void
 	 */
 	public static function log( $email, $response ) {
-		$validator_options = get_doltics_validator_options();
+		$validator_options = doltics_validator_get_options();
 		if ( 1 === $validator_options['debug'] ) {
 			Doltics_Validator_Logger::log( $email . ' :: ' . $response );
 		}

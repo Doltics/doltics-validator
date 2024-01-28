@@ -1,4 +1,6 @@
 <?php
+namespace DolticsValidator;
+
 /**
  * Admin class.
  *
@@ -61,7 +63,7 @@ class Doltics_Validator_Admin {
 	 * @return void
 	 */
 	public function admin_menu_page() {
-		$validator_options = get_doltics_validator_options();
+		$validator_options = doltics_validator_get_options();
 		?>
 		<div class="doltics-validator-wrap wrap">
 			<h1><?php esc_html_e( 'Doltics Validator Settings', 'doltics-validator' ); ?></h1>
@@ -143,5 +145,6 @@ class Doltics_Validator_Admin {
 		}
 
 		wp_safe_redirect( $url );
+		exit;
 	}
 }

@@ -77,7 +77,7 @@ define( 'DOLTICS_VALIDATOR_PLUGIN_VERSION', '1.0.0' );
  *
  * @return array
  */
-function get_doltics_validator_options() {
+function doltics_validator_get_options() {
 	return get_option(
 		'doltics_validator_options',
 		array(

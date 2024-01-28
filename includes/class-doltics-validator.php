@@ -1,4 +1,6 @@
 <?php
+namespace DolticsValidator;
+
 /**
  * Base class for plugin.
  *

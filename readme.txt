@@ -14,9 +14,13 @@ Simple validation for your website.
 Simple validation for your website.
 
 Our validation API checks and ensures the content processes on your website is valid.
-We validate email records against the domain to ensure that you are receiving and sending valid content from your site.
+We validate email records against the domain to ensure that you are receiving and sending valid content from your site using out third party solution.
+We check and verify the email domain MX records are valid. Each new unique request is maintained for 24 hours before a fresh request is done.
 
-[Documentation](https://docs.doltics.com/validator)
+1. [Documentation](https://docs.doltics.com/validator)
+2. [Terms of service](https://doltics.com/terms-of-service/)
+
+Future plugin updates will include [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) to better understand spam emails and email content with compatibility with popular form plugins.
 
 == Installation ==
 
