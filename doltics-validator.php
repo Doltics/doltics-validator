@@ -47,19 +47,24 @@ if ( ! defined( 'DOLTICS_VALIDATOR_PLUGIN_LOG_DIR' ) ) {
  * @param string $class_name Name of the class to load.
  */
 function doltics_validator_autoload( $class_name ) {
-	/*
-	 * Load plugin classes:
-	 * - Class name: Doltics_Validator.
-	 * - File name: class-doltics-validator.php.
-	 */
+	
 	$pools = explode( '\\', $class_name );
 
 	if ( 'DolticsValidator' !== $pools[0] ) {
 		return;
 	}
 
-	$class_name = str_replace( 'DolticsValidator\'', '', $pools[1] );
-	$class_file = 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
+	// Make sure the classname is set.
+	if ( ! isset( $pools[1] ) ) {
+		return;
+	}
+
+	/*
+	 * Load plugin classes:
+	 * - Class name: Doltics_Validator.
+	 * - File name: class-doltics-validator.php.
+	 */
+	$class_file = 'class-' . strtolower( str_replace( '_', '-', $pools[1] ) ) . '.php';
 	$class_path = DOLTICS_VALIDATOR_PLUGIN_DIR . '/includes/' . $class_file;
 
 
