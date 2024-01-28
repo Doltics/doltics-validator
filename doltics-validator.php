@@ -52,8 +52,16 @@ function doltics_validator_autoload( $class_name ) {
 	 * - Class name: Doltics_Validator.
 	 * - File name: class-doltics-validator.php.
 	 */
+	$pools = explode( '\\', $class_name );
+
+	if ( 'DolticsValidator' !== $pools[0] ) {
+		return;
+	}
+
+	$class_name = str_replace( 'DolticsValidator\'', '', $pools[1] );
 	$class_file = 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
 	$class_path = DOLTICS_VALIDATOR_PLUGIN_DIR . '/includes/' . $class_file;
+
 
 	if ( file_exists( $class_path ) ) {
 		require $class_path;
@@ -88,4 +96,4 @@ function doltics_validator_get_options() {
 }
 
 // Initiate the plugin.
-Doltics_Validator::instance();
+\DolticsValidator\Doltics_Validator::instance();
