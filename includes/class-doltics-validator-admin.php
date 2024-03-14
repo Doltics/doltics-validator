@@ -74,39 +74,52 @@ class Doltics_Validator_Admin {
 					<tr>
 						<th scope="row"><?php esc_html_e( 'Enable Email Validation', 'doltics-validator' ); ?></th>
 						<td>
-							<fieldset>
-								<legend class="screen-reader-text">
-									<span><?php esc_html_e( 'Enable Email Validation', 'doltics-validator' ); ?></span>
-								</legend>
-								<label for="enabled">
-									<input name="enabled" type="checkbox" id="enabled" value="1" <?php checked( $validator_options['enabled'], 1 ); ?> />
-									<p class="description" id="enabled-description">
-										<?php
-										// translators: 1: Opening link tag 2: Closing link tag.
-										echo sprintf( esc_html__( 'Enable this to use our email %1$svalidation API%2$s', 'doltics-validator' ), '<a href="https://docs.doltics.com/validator" target="_blank">', '</a>' );
-										?>
-									</p>
-								</label>
-							</fieldset>
+							<legend class="screen-reader-text">
+								<span><?php esc_html_e( 'Enable Email Validation', 'doltics-validator' ); ?></span>
+							</legend>
+							<label for="enabled">
+								<input name="enabled" type="checkbox" id="enabled" value="1" <?php checked( $validator_options['enabled'], 1 ); ?> />
+								<p class="description" id="enabled-description">
+									<?php
+									// translators: 1: Opening link tag 2: Closing link tag.
+									echo sprintf( esc_html__( 'Enable this to use our email %1$svalidation API%2$s', 'doltics-validator' ), '<a href="https://doltics.com/docs-category/email-validation/" target="_blank">', '</a>' );
+									?>
+								</p>
+							</label>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row"><?php esc_html_e( 'Enable Debugging', 'doltics-validator' ); ?></th>
 						<td>
-							<fieldset>
-								<legend class="screen-reader-text">
-									<span><?php esc_html_e( 'Enable Debugging', 'doltics-validator' ); ?></span>
-								</legend>
-								<label for="debugging">
-									<input name="debugging" type="checkbox" id="debugging" value="1" <?php checked( $validator_options['debug'], 1 ); ?> />
-									<p class="description" id="enabled-debugging">
-									<?php
-									// translators: The debug directory.
-									echo sprintf( esc_html__( 'Enable debugging. This will generate logs for the API requests in the  %s directory', 'doltics-validator' ), '<em>' . esc_attr( DOLTICS_VALIDATOR_PLUGIN_LOG_DIR ) . '</em>' );
-									?>
-									</p>
-								</label>
-							</fieldset>
+							<legend class="screen-reader-text">
+								<span><?php esc_html_e( 'Enable Debugging', 'doltics-validator' ); ?></span>
+							</legend>
+							<label for="debugging">
+								<input name="debugging" type="checkbox" id="debugging" value="1" <?php checked( $validator_options['debug'], 1 ); ?> />
+								<p class="description" id="enabled-debugging">
+								<?php
+								// translators: The debug directory.
+								echo sprintf( esc_html__( 'Enable debugging. This will generate logs for the API requests in the  %s directory', 'doltics-validator' ), '<em>' . esc_attr( DOLTICS_VALIDATOR_PLUGIN_LOG_DIR ) . '</em>' );
+								?>
+								</p>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'API Key', 'doltics-validator' ); ?></th>
+						<td>
+							<legend class="screen-reader-text">
+								<span><?php esc_html_e( 'API Key', 'doltics-validator' ); ?></span>
+							</legend>
+							<label for="apikey">
+								<input name="apikey" type="text" id="apikey" value="<?php echo isset( $validator_options['apikey'] ) ? esc_attr( $validator_options['apikey'] ) : ''; ?>" class="regular-text">
+								<p class="description" id="enabled-apikey">
+								<?php
+								// translators: The debug directory.
+								echo sprintf( esc_html__( 'Generate or copy your API key from %1$syour account%2$s', 'doltics-validator' ), '<a href="https://dolticsvalidator.com/my-account/api-keys/" target="_blank">', '</a>' );
+								?>
+								</p>
+							</label>
 						</td>
 					</tr>
 				</table>
@@ -127,16 +140,19 @@ class Doltics_Validator_Admin {
 	public function process_admin_actions() {
 		$url = admin_url( 'options-general.php?page=doltics-validator' );
 		if ( isset( $_POST['doltics_validator_nonce_field'] ) &&
-			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['doltics_validator_nonce_field'] ) ), 'doltics_validator_nonce' )
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['doltics_validator_nonce_field'] ) ), 'doltics_validator_nonce' ) &&
+			current_user_can( 'manage_options' )
 		) {
 			$debugging = isset( $_POST['debugging'] ) ? 1 : 0;
 			$enabled   = isset( $_POST['enabled'] ) ? 1 : 0;
+			$apikey    = sanitize_text_field( wp_unslash( $_POST['apikey'] ) );
 
 			update_option(
 				'doltics_validator_options',
 				array(
 					'debug'   => $debugging,
 					'enabled' => $enabled,
+					'apikey'  => $apikey,
 				),
 				false
 			);

@@ -95,6 +95,7 @@ function doltics_validator_get_options() {
 		array(
 			'debug'   => 0,
 			'enabled' => 0,
+			'apikey'  => '',
 		)
 	);
 }
