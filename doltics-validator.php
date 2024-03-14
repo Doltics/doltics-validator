@@ -90,14 +90,15 @@ define( 'DOLTICS_VALIDATOR_PLUGIN_VERSION', '1.0.0' );
  * @return array
  */
 function doltics_validator_get_options() {
-	return get_option(
-		'doltics_validator_options',
-		array(
-			'debug'   => 0,
-			'enabled' => 0,
-			'apikey'  => '',
-		)
+	$defaults = array(
+		'debug'         => 0,
+		'enabled'       => 0,
+		'apikey'        => '',
+		'protect_forms' => 0,
 	);
+
+	$options = get_option( 'doltics_validator_options', $defaults );
+	return wp_parse_args( $options, $defaults );
 }
 
 // Initiate the plugin.
