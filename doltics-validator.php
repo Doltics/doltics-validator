@@ -101,5 +101,18 @@ function doltics_validator_get_options() {
 	return wp_parse_args( $options, $defaults );
 }
 
+/**
+ * Get validator setting.
+ *
+ * @param string $setting The setting name.
+ *
+ * @return bool|mixed
+ */
+function doltics_validator_get_setting( $setting ) {
+	$options = doltics_validator_get_options();
+	return isset( $options[ $setting ] ) ? $options[ $setting ] : false;
+}
+
+
 // Initiate the plugin.
 \DolticsValidator\Doltics_Validator::instance();

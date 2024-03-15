@@ -23,6 +23,7 @@ class Doltics_Validator_Integrations {
 	 */
 	protected static $instance = null;
 
+
 	/**
 	 * Get the instance.
 	 */
@@ -38,6 +39,11 @@ class Doltics_Validator_Integrations {
 	 */
 	public function __construct() {
 		add_filter( 'is_email', array( $this, 'validate_email' ), 10, 3 );
+
+		$protect_forms = doltics_validator_get_setting( 'protect_forms' );
+		if ( 1 === $this->validator_options['protect_forms'] ) {
+			
+		}
 	}
 
 	/**
@@ -51,8 +57,8 @@ class Doltics_Validator_Integrations {
 	 */
 	public function validate_email( $is_email, $email, $context ) {
 		if ( $is_email ) {
-			$validator_options = doltics_validator_get_options();
-			if ( 1 === $validator_options['enabled'] ) {
+			$enabled = doltics_validator_get_setting( 'enabled' );
+			if ( 1 === $enabled ) {
 				// If the request is a valid email, we validate via the API.
 				return Doltics_Validator_Api::validate( $email );
 			}
