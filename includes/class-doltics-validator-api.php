@@ -129,7 +129,9 @@ class Doltics_Validator_Api {
 		);
 
 		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
-			return json_decode( $response['body'], true );
+			$data = json_decode( $response['body'], true );
+			self::log( $email, $data );
+			return ( 200 === $data['status'] ) ? $data : false;
 		}
 
 		self::log( $email, $response->get_error_message() );

@@ -42,7 +42,7 @@ class Doltics_Validator_Integrations {
 
 		$protect_forms = doltics_validator_get_setting( 'protect_forms' );
 		if ( 1 === $this->validator_options['protect_forms'] ) {
-			
+			add_filter( 'preprocess_comment', array( $this, 'check_comment_data' ), 1 );
 		}
 	}
 
@@ -64,5 +64,45 @@ class Doltics_Validator_Integrations {
 			}
 		}
 		return $is_email;
+	}
+
+	/**
+	 * Check if content is spam
+	 *
+	 * @param string $email The email.
+	 * @param string $content The content.
+	 *
+	 * @return boolean
+	 */
+	public function is_spam( $email, $content ) {
+		$response = Doltics_Validator_Api::spam_check( $email, $content );
+
+		// API call failed. Do nothing.
+		if ( ! $response ) {
+			return false;
+		}
+
+		// If the probability of spam if higher, the content is spam.
+		return ( $response['spam'] > $response['normal'] );
+	}
+
+	/**
+	 * Check comment data
+	 *
+	 * @param array $commentdata The comment data.
+	 * 
+	 * @return array
+	 */
+	public function check_comment_data( $commentdata ) {
+		$content = $commentdata['comment_content'];
+		$email   = $commentdata['comment_author_email'];
+
+		$is_spam = $this->is_spam( $email, $content );
+
+		if ( $is_spam ) {
+			$commentdata['comment_approved'] = 'spam';
+		}
+		
+		return $commentdata;
 	}
 }
