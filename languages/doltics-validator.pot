@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Doltics Validator 1.0.0\n"
+"Project-Id-Version: Doltics Validator 1.1.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/doltics-validator\n"
-"POT-Creation-Date: 2024-01-28 18:43:56+00:00\n"
+"POT-Creation-Date: 2024-03-17 19:52:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,34 +29,76 @@ msgstr ""
 msgid "Doltics Validator"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:69
+#: includes/class-doltics-validator-admin.php:88
 msgid "Doltics Validator Settings"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:75
-#: includes/class-doltics-validator-admin.php:79
+#: includes/class-doltics-validator-admin.php:94
+#: includes/class-doltics-validator-admin.php:97
+msgid "API Key"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:104
+#. translators: The debug directory.
+msgid "Generate or copy your API key from %1$syour account%2$s"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:111
+#: includes/class-doltics-validator-admin.php:114
 msgid "Enable Email Validation"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:86
+#: includes/class-doltics-validator-admin.php:121
 #. translators: 1: Opening link tag 2: Closing link tag.
 msgid "Enable this to use our email %1$svalidation API%2$s"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:94
-#: includes/class-doltics-validator-admin.php:98
+#: includes/class-doltics-validator-admin.php:128
+#: includes/class-doltics-validator-admin.php:131
+msgid "Protect Forms"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:138
+#. translators: 1: Opening link tag 2: Closing link tag.
+msgid ""
+"Enable this to use our  %1$sSPAM protection API%2$s to %3$sprotect your "
+"forms%4$s. An API key is required for this"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:138
+msgid "Forms we integrate with"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:145
+#: includes/class-doltics-validator-admin.php:148
 msgid "Enable Debugging"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:105
+#: includes/class-doltics-validator-admin.php:155
 #. translators: The debug directory.
 msgid ""
 "Enable debugging. This will generate logs for the API requests in the  %s "
 "directory"
 msgstr ""
 
-#: includes/class-doltics-validator-admin.php:114
+#: includes/class-doltics-validator-admin.php:163
 msgid "Save Changes"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:168
+msgid "Login and registration forms"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:169
+msgid "Comment forms"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:170
+msgid "Forminator"
+msgstr ""
+
+#: includes/class-doltics-validator-admin.php:171
+msgid "Contact Form 7"
 msgstr ""
 
 #: includes/class-doltics-validator.php:74
