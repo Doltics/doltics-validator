@@ -41,7 +41,7 @@ class Doltics_Validator_Integrations {
 		add_filter( 'is_email', array( $this, 'validate_email' ), 10, 3 );
 
 		$protect_forms = doltics_validator_get_setting( 'protect_forms' );
-		if ( 1 === $this->validator_options['protect_forms'] ) {
+		if ( 1 === $protect_forms ) {
 			add_filter( 'preprocess_comment', array( $this, 'check_comment_data' ) );
 			add_filter( 'forminator_spam_protection', array( $this, 'forminator_spam_protection' ), 10, 4 );
 			add_filter( 'wpcf7_spam', array( $this, 'wpcf7_spam_protection' ), 10, 2 );
@@ -173,7 +173,7 @@ class Doltics_Validator_Integrations {
 			$content = '';
 
 			$posted_data = array_filter(
-				(array) $_POST,
+				(array) $_POST, // phpcs:disable WordPress.Security.NonceVerification
 				static function ( $key ) {
 					return ! str_starts_with( $key, '_' );
 				},

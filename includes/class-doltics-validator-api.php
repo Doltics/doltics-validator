@@ -47,7 +47,7 @@ class Doltics_Validator_Api {
 	 */
 	public static function get_domain() {
 		$url    = get_site_url();
-		$pieces = parse_url( $url );
+		$pieces = wp_parse_url( $url );
 		$domain = isset( $pieces['host'] ) ? $pieces['host'] : $pieces['path'];
 		if ( preg_match( '/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs ) ) {
 			return $regs['domain'];
