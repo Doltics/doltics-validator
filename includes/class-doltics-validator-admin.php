@@ -78,6 +78,11 @@ class Doltics_Validator_Admin {
 	 */
 	public function admin_menu_page() {
 		$validator_options = doltics_validator_get_options();
+		$api_status        = get_option( 'doltics_validator_api_key_status', array( 'status' => 'invalid', 'key' => '' ) );
+		$api_state         = false;
+		if ( ! empty( $api_status['key'] ) ) {
+			$api_state = $api_status['status'];
+		}
 		?>
 		<div class="doltics-validator-wrap wrap">
 			<h1><?php esc_html_e( 'Doltics Validator Settings', 'doltics-validator' ); ?></h1>
@@ -92,7 +97,7 @@ class Doltics_Validator_Admin {
 								<span><?php esc_html_e( 'API Key', 'doltics-validator' ); ?></span>
 							</legend>
 							<label for="apikey">
-								<input name="apikey" type="text" id="apikey" value="<?php echo isset( $validator_options['apikey'] ) ? esc_attr( $validator_options['apikey'] ) : ''; ?>" class="regular-text">
+								<input name="apikey" type="text" id="apikey" value="<?php echo isset( $validator_options['apikey'] ) ? esc_attr( $validator_options['apikey'] ) : ''; ?>" class="regular-text" /> <?php echo $api_state ? ( 'valid' === $api_state ? '<span style="color:green" class="dashicons dashicons-yes-alt"></span>' : '<span style="color:red" class="dashicons dashicons-dismiss"></span>' ) : ''; ?>
 								<p class="description" id="enabled-apikey">
 								<?php
 								// translators: The debug directory.
@@ -153,7 +158,6 @@ class Doltics_Validator_Admin {
 							</label>
 						</td>
 					</tr>
-					
 				</table>
 				<p class="submit">
 					<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'doltics-validator' ); ?>" />
@@ -187,6 +191,18 @@ class Doltics_Validator_Admin {
 			$enabled       = isset( $_POST['enabled'] ) ? 1 : 0;
 			$protect_forms = isset( $_POST['protect_forms'] ) ? 1 : 0;
 			$apikey        = sanitize_text_field( wp_unslash( $_POST['apikey'] ) );
+
+			if ( ! empty( $apikey ) ) {
+				$api_status = get_option( 'doltics_validator_api_key_status', array( 'status' => 'invalid', 'key' => '' ) );
+				if ( $apikey !== $api_status['key'] ) {
+					$status = Doltics_Validator_Api::check_api_key( $apikey );
+					if ( $status && $status->status ) {
+						update_option( 'doltics_validator_api_key_status', array( 'status' => 'valid', 'key' => $apikey ), false );
+					} else {
+						update_option( 'doltics_validator_api_key_status', array( 'status' => 'invalid', 'key' => '' ), false );
+					}
+				}
+			}
 
 			update_option(
 				'doltics_validator_options',

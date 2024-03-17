@@ -62,7 +62,12 @@ class Doltics_Validator_Integrations {
 			$enabled = doltics_validator_get_setting( 'enabled' );
 			if ( 1 === $enabled ) {
 				// If the request is a valid email, we validate via the API.
-				return Doltics_Validator_Api::validate( $email );
+				$resp = Doltics_Validator_Api::validate( $email );
+				if ( ! $resp ) {
+					return $is_email;
+				}
+
+				return ( 200 === $resp->status );
 			}
 		}
 		return $is_email;

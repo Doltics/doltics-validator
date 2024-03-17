@@ -34,7 +34,7 @@ class Doltics_Validator_Api {
 
 		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 			$resp = json_decode( $response['body'] );
-			return $resp->status;
+			return $resp;
 		}
 
 		return apply_filters( 'doltics_validation_api_valid_response', false, $apikey );
@@ -87,7 +87,7 @@ class Doltics_Validator_Api {
 		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 			$resp = json_decode( $response['body'] );
 			self::log( $email, $resp );
-			return 200 === $resp->status;
+			return $resp;
 		}
 
 		self::log( $email, $response->get_error_message() );
