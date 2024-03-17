@@ -42,7 +42,8 @@ class Doltics_Validator_Integrations {
 
 		$protect_forms = doltics_validator_get_setting( 'protect_forms' );
 		if ( 1 === $this->validator_options['protect_forms'] ) {
-			add_filter( 'preprocess_comment', array( $this, 'check_comment_data' ), 1 );
+			add_filter( 'preprocess_comment', array( $this, 'check_comment_data' ) );
+			add_filter( 'forminator_spam_protection', array( $this, 'forminator_spam_protection' ), 10, 4 );
 		}
 	}
 
@@ -97,6 +98,11 @@ class Doltics_Validator_Integrations {
 		$content = $commentdata['comment_content'];
 		$email   = $commentdata['comment_author_email'];
 
+		if ( ! empty( $commentdata['user_ID'] ) ) {
+			$wp_user = get_userdata( $commentdata['user_ID'] );
+			$email   = $user_info->user_email;
+		}
+
 		$is_spam = $this->is_spam( $email, $content );
 
 		if ( $is_spam ) {
@@ -104,5 +110,47 @@ class Doltics_Validator_Integrations {
 		}
 		
 		return $commentdata;
+	}
+
+	/**
+	 * Handle forminator spam protection.
+	 *
+	 * @param bool   $is_spam If the data is spam.
+	 * @param array  $posted_params The posted parameters.
+	 * @param int    $form_id The form id.
+	 * @param string $form_type The form type.
+	 *
+	 * @return bool $is_spam
+	 */
+	public function forminator_spam_protection( $is_spam, $posted_params, $form_id, $form_type ) {
+		$email   = false;
+		$content = '';
+		foreach ( $posted_params as $param ) {
+			if ( isset( $param['name'] ) && isset( $param['value'] ) ) {
+				$has_akismet_data = true;
+				if ( filter_var( $param['value'], FILTER_VALIDATE_EMAIL ) ) {
+					$email = $param['value'];
+				}
+				if ( is_array( $param['value'] ) ) {
+					if (
+						isset( $param['field_type'] ) &&
+						'signature' === $param['field_type'] &&
+						! empty( $param['value']['file']['file_url'] )
+					) {
+						$content .= "\n\n" . $param['value']['file']['file_url'];
+					} else {
+						$content .= "\n\n" . implode( ', ', $param['value'] );
+					}
+				} else {
+					$content .= "\n\n" . $param['value'];
+				}
+			}
+		}
+
+		if ( $email && ! empty( $content ) ) {
+			$is_spam = $this->is_spam( $email, $content );
+		}
+
+		return $is_spam;
 	}
 }

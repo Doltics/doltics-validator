@@ -160,7 +160,11 @@ class Doltics_Validator_Admin {
 				</p>
 			</form>
 			<div id="doltics-form-integrations" style="display:none;">
-				<p>Lorem Ipsum sit dolla amet.</p>
+				<ul>
+					<li><?php esc_html_e( 'Login and registration forms', 'doltics-validator' ); ?></li>
+					<li><?php esc_html_e( 'Comment forms', 'doltics-validator' ); ?></li>
+					<li><?php esc_html_e( 'Forminator', 'doltics-validator' ); ?></li>
+				</ul>
 			</div>
 		</div>
 		<?php
