@@ -164,6 +164,7 @@ class Doltics_Validator_Admin {
 					<li><?php esc_html_e( 'Login and registration forms', 'doltics-validator' ); ?></li>
 					<li><?php esc_html_e( 'Comment forms', 'doltics-validator' ); ?></li>
 					<li><?php esc_html_e( 'Forminator', 'doltics-validator' ); ?></li>
+					<li><?php esc_html_e( 'Contact Form 7', 'doltics-validator' ); ?></li>
 				</ul>
 			</div>
 		</div>

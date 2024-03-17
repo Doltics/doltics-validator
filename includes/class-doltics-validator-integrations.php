@@ -44,6 +44,7 @@ class Doltics_Validator_Integrations {
 		if ( 1 === $this->validator_options['protect_forms'] ) {
 			add_filter( 'preprocess_comment', array( $this, 'check_comment_data' ) );
 			add_filter( 'forminator_spam_protection', array( $this, 'forminator_spam_protection' ), 10, 4 );
+			add_filter( 'wpcf7_spam', array( $this, 'wpcf7_spam_protection' ), 10, 2 );
 		}
 	}
 
@@ -127,7 +128,6 @@ class Doltics_Validator_Integrations {
 		$content = '';
 		foreach ( $posted_params as $param ) {
 			if ( isset( $param['name'] ) && isset( $param['value'] ) ) {
-				$has_akismet_data = true;
 				if ( filter_var( $param['value'], FILTER_VALIDATE_EMAIL ) ) {
 					$email = $param['value'];
 				}
@@ -152,5 +152,66 @@ class Doltics_Validator_Integrations {
 		}
 
 		return $is_spam;
+	}
+
+	/**
+	 * Check for contact form 7 spam submission.
+	 *
+	 * @param bool $spam Response status of spam check.
+	 * @param object $submission The submission class.
+	 *
+	 * @return bool $spam
+	 */
+	public function wpcf7_spam_protection( $spam, $submission ) {
+		if ( ! $spam ) {
+			$email   = false;
+			$content = '';
+
+			$posted_data = array_filter(
+				(array) $_POST,
+				static function ( $key ) {
+					return ! str_starts_with( $key, '_' );
+				},
+				ARRAY_FILTER_USE_KEY
+			);
+	
+			$posted_data = wp_unslash( $posted_data );
+
+			$tags = $submission->contact_form->scan_form_tags( array(
+				'feature' => array(
+					'name-attr',
+					'! not-for-mail',
+				),
+			) );
+
+			$tags = array_reduce( $tags, static function ( $carry, $tag ) {
+				if ( $tag->name and ! isset( $carry[ $tag->name ] ) ) {
+					$carry[ $tag->name ] = $tag;
+				}
+	
+				return $carry;
+			}, array() );
+	
+			foreach ( $tags as $tag ) {
+				$value = $posted_data[ $tag->name ] ?? '';
+
+				if ( filter_var( $value, FILTER_VALIDATE_EMAIL ) ) {
+					$email = $value;
+				} else {
+					if ( is_array( $value ) ) {
+						$content .= implode( '<br/>', $value );
+					} elseif ( is_string( $value ) ) {
+						$value    = wp_check_invalid_utf8( $value );
+						$value    = wp_kses_no_null( $value );
+						$content .= $value;
+					}
+				}
+			}
+
+			if ( $email && ! empty( $content ) ) {
+				$spam = $this->is_spam( $email, $content );
+			}
+		}
+		return $spam;
 	}
 }
