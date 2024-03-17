@@ -69,7 +69,7 @@ class Doltics_Validator_Api {
 
 		$args = array();
 
-		if ( $api_key ) {
+		if ( $api_key && doltics_validator_is_api_key_valid() ) {
 			$args = array(
 				'headers' => array(
 					'apikey' => $api_key
@@ -105,6 +105,10 @@ class Doltics_Validator_Api {
 	 * @return bool|array Return the spam rating or the response status. False if no api key is set
 	 */
 	public static function spam_check( $email, $content ) {
+		if ( ! doltics_validator_is_api_key_valid() ) {
+			return false;
+		}
+
 		$options = doltics_validator_get_options();
 		$api_key = isset( $options['apikey'] ) ? $options['apikey'] : false;
 

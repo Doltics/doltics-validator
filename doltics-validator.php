@@ -102,6 +102,26 @@ function doltics_validator_get_options() {
 }
 
 /**
+ * Check if the API key is valid.
+ *
+ * @return void
+ */
+function doltics_validator_is_api_key_valid() {
+	$validator_options = doltics_validator_get_options();
+	$api_status        = get_option( 'doltics_validator_api_key_status', array( 'status' => 'invalid', 'key' => '' ) );
+	$api_state         = false;
+	if ( ! empty( $api_status['key'] ) ) {
+		$api_state = $api_status['status'];
+	}
+
+	if ( ! $api_state ) {
+		return false;
+	}
+
+	return 'valid' === $api_state && ( isset( $validator_options['apikey'] ) && ! empty( $validator_options['apikey'] ) );
+}
+
+/**
  * Get validator setting.
  *
  * @param string $setting The setting name.
