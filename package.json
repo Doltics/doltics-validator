@@ -2,7 +2,7 @@
 	"name": "doltics-validator",
 	"title": "Doltics Validator",
 	"description": "Doltics Validator",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"homepage": "https://www.doltics.com",
 	"license": "GPLv2",
 	"scripts": {

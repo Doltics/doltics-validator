@@ -3,7 +3,7 @@
  * Plugin Name:         Doltics Validator
  * Plugin URI:          https://docs.doltics.com/validator
  * Description:         Validator API for your website.
- * Version:             1.1.0
+ * Version:             1.1.1
  * Author:              doltics
  * Author URI:          https://www.doltics.com
  * License:             GPLv2
