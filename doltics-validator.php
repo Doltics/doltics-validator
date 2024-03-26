@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:         Doltics Validator
- * Plugin URI:          https://docs.doltics.com/validator
+ * Plugin URI:          https://dolticsvalidator.com/
  * Description:         Validator API for your website.
  * Version:             1.1.1
  * Author:              doltics
