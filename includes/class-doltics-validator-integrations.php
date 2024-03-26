@@ -182,7 +182,7 @@ class Doltics_Validator_Integrations {
 	
 			$posted_data = wp_unslash( $posted_data );
 
-			$tags = $submission->contact_form->scan_form_tags( array(
+			$tags = $submission->get_contact_form()->scan_form_tags( array(
 				'feature' => array(
 					'name-attr',
 					'! not-for-mail',
